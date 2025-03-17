@@ -1,14 +1,21 @@
 package game;
 
+import game.Bots.Bot;
+import game.Bots.Difficult;
+
 import java.util.Scanner;
 
 public class Game {
 
     private Player player;
 
+    private Bot bot;
+
     private final Scanner scanner = new Scanner(System.in);
 
     static int gameId;
+
+    private String lastWinner;
 
     // Запуск игры
     public void run() {
@@ -20,6 +27,8 @@ public class Game {
                 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*
                 """);
         this.player = createPlayer();
+        this.bot = new Bot(Difficult.Easy);
+
 
 
         while (true) {
@@ -35,6 +44,13 @@ public class Game {
                 if (choice != Move.NONE) {
                     System.out.println("Вы выбрали: " + choice.getName());
                 }
+                var botChoice = bot.getChoice();
+
+                System.out.println("Бот выбрал: " + botChoice.getName());
+
+                setWinnerPvB(choice, botChoice);
+
+                System.out.println(this.lastWinner);
             }
         }
     }
@@ -75,5 +91,27 @@ public class Game {
 
         return new Player(name);
     }
+
+
+    private void setWinnerPvB(Move playerMove, Move botMove) {
+        if (playerMove.beats(botMove)) {
+            this.lastWinner = player.getName();
+        }
+
+        else if (botMove.beats(playerMove)) {
+            this.lastWinner = bot.toString();
+        }
+
+        else {
+            this.lastWinner = "Ничья";
+        }
+    }
+
+    /*For future
+    private void setWinnerPvP(Move playerMove, Move botMove) {
+
+    } */
+
+
 
 }
