@@ -6,9 +6,9 @@ import game.Bots.algorithms.EasyAlgorithm;
 public class FactoryProvider {
     public static AlgorithmsFactory getAlgorithmsFactory(Difficult difficulty) {
         switch (difficulty) {
-            case Easy -> new EasyAlgorithm();
-            case Medium -> new EasyAlgorithm();
+            case Difficult.Easy ->  new EasyBotFactory();
+            case Difficult.Medium -> new EasyAlgorithm();
         }
-        return null;
+        return new EasyBotFactory();
     }
 }
