@@ -7,7 +7,7 @@ public class EasyAlgorithm implements Algorithm<Move> {
     private final Random rand = new Random();
 
     private int generateChoice() {
-        return this.rand.nextInt(3);
+        return this.rand.nextInt(6);
     }
 
 
